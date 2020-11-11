@@ -1,0 +1,7 @@
+db.sqlite3
+*.log
+*.pot
+*.pyc
+*.zip
+__pycache__/
+venv/
