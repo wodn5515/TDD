@@ -1,15 +1,15 @@
+from django.test import LiveServerTestCase
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
-import unittest, time
+import time
 
 
-class NewVisitorTest(unittest.TestCase):
+class NewVisitorTest(LiveServerTestCase):
     chromedriver = '/home/killcoding/desktop/chromedriver/chromedriver'
 
     def setUp(self):
         self.browser = webdriver.Chrome(self.chromedriver)
-        self.browser.implicitly_wait(3)
 
     def tearDown(self):
         self.browser.quit()
@@ -24,7 +24,7 @@ class NewVisitorTest(unittest.TestCase):
 
         # 에디스는 멋진 작업 목록 온라인 앱이 나왔다는 소식을 듣고
         # 해당 웹사이트를 확인하러 간다
-        browser.get('http://localhost:8000')
+        browser.get(self.live_server_url)
 
         # 웹 페이지 타이틀과 헤더가 'To-Fo'를 표시하고 있다
         self.assertIn('To-Do', browser.title)
@@ -64,7 +64,4 @@ class NewVisitorTest(unittest.TestCase):
 
         # 해당 URL에 접속 하면 그녀가 만든 작업 목록이 그대로 있는 것을 확인할 수 있다
 
-        # 만족하고 잠자리에 든다
-
-if __name__ == "__main__":
-    unittest.main(warnings='ignore')
+        # 만족하고 잠자리에 든다\
