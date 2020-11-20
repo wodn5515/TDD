@@ -42,7 +42,7 @@ class NewVisitorTest(LiveServerTestCase):
         # (에디스의 취미는 날치 잡이용 그물을 만드는 것이다.)
         inputbox.send_keys('공작깃털 사기')
 
-        # 엔터키를 치면 페이지가 갱신되고 작업 목록에
+        # 엔터키를 누르면 새로운 URL로 바뀐다. 그리고 작업 목록에
         # "1: 공작깃털 사기" 아이템이 추가된다
         inputbox.send_keys(Keys.ENTER)
         edith_list_url = browser.current_url
@@ -56,8 +56,8 @@ class NewVisitorTest(LiveServerTestCase):
         inputbox.send_keys(Keys.ENTER)
 
         # 페이지는 다시 갱신되고, 두 개 아이템이 목록에 보인다.
-        self.check_for_row_in_list_table('1: 공작깃털 사기')
         self.check_for_row_in_list_table('2: 공작깃털을 이용해서 그물 만들기')
+        self.check_for_row_in_list_table('1: 공작깃털 사기')
 
         # 새로운 사용자인 프란시스가 사이트에 접속한다
 
@@ -85,7 +85,7 @@ class NewVisitorTest(LiveServerTestCase):
         self.assertNotEqual(francis_list_url, edith_list_url)
 
         # 에디스가 입력한 흔적이 없다는 것을 다시 확인한다
-        page_text = browser.find_element_by_id('body').text
+        page_text = browser.find_element_by_tag_name('body').text
         self.assertNotIn('공작깃털 사기', page_text)
         self.assertIn('우유 사기', page_text)
         
