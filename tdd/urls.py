@@ -19,6 +19,7 @@ from lists import views as list_views
 from . import views
 
 urlpatterns = [
-    path('', list_views.home_page, name='home')
+    path('', list_views.home_page, name='home'),
+    path('lists/', include('lists.urls')),
     # path('admin/', admin.site.urls),
 ]
